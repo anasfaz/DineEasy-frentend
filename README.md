@@ -1,0 +1,1 @@
+DineEasy is a cutting-edge restaurant ordering system that allows customers to order food directly from their mobile phones while dining in

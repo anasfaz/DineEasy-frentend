@@ -1,15 +1,17 @@
 
+import React from 'react'
 
 import './App.css'
-import { Navbar } from './components/navbar/Navbar'
+import { Home } from './pages/user/Home'
+
 
 function App() {
- 
+  
+  
 
   return (
     <>
-      <Navbar/>
-     <h1 className="text-3xl font-bold underline text-center p-8">Hello world!</h1> 
+      <Home/> 
     </>
   )
 }

@@ -5,8 +5,8 @@ export const Navbar = () => {
         <div className="border py-3 px-6">
           <div className="flex justify-between">
             <div className="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
+              {/* <svg
+                xmlns="https://scontent.fcok14-1.fna.fbcdn.net/v/t39.30808-6/240997591_801377530542302_6650432983832741370_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Fqj4NayXuTYAX986xkW&_nc_ht=scontent.fcok14-1.fna&oh=00_AfDsJxvMdQ_Hz8l-pV_OZCLcfc5i-OaqJ3UEJxsvNvEp2A&oe=64B14B64://www.w3.org/2000/svg"
                 className="h-6 w-6 text-red-500"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -18,9 +18,10 @@ export const Navbar = () => {
                   stroke-linejoin="round"
                   d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
                 />
-              </svg>
+              </svg> */}
+              <img className="h-6 w-6 text-red-500" src="https://scontent.fcok14-1.fna.fbcdn.net/v/t39.30808-6/240997591_801377530542302_6650432983832741370_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Fqj4NayXuTYAX986xkW&_nc_ht=scontent.fcok14-1.fna&oh=00_AfDsJxvMdQ_Hz8l-pV_OZCLcfc5i-OaqJ3UEJxsvNvEp2A&oe=64B14B64" />
               <span className="ml-2 font-semibold text-[#252C32]">
-                What a Market
+              Charcoal Bay
               </span>
             </div>
 

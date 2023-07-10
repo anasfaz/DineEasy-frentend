@@ -1,9 +1,11 @@
 
 import React from 'react'
 
-import './App.css'
+
 import { Home } from './pages/user/Home'
 import { Route,BrowserRouter,Routes } from 'react-router-dom'
+// import { Login } from './pages/user/Login'
+import LoginPhone from './pages/user/LoginPhone'
 
 function App() {
   
@@ -13,7 +15,10 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Home/>}/>
+          <Route path='/' element={<Home />} />
+         {/* <Route path='/login' element={<Login/>}/> */}
+          <Route path='/login' element={<LoginPhone />} />
+          
       </Routes>
       </BrowserRouter>
        

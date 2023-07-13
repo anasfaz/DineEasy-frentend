@@ -6,6 +6,7 @@ import { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { auth } from "../../config/firebase";
+import {userNumberVerify} from'../../api/userServices'
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 // import { toast, Toaster } from "react-hot-toast";
 declare const window: any;
@@ -60,7 +61,16 @@ const LoginPhone = () => {
       .confirm(otp)
       .then(async (res) => {
         console.log(res);
-        setUser(res.user);
+      const response= await userNumberVerify(res._tokenResponse.idToken)
+        // setUser(res.user);
+        console.log(response,'-----------------respons login66 page');
+        
+        console.log(response?.data,'---------------user data-------------');
+        if (response?.data.user) {
+          setUser(response.data.user)
+
+        }
+        
         setLoading(false);
       })
       .catch((err) => {

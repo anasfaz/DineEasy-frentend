@@ -3,7 +3,7 @@ import { MdPersonOutline, MdFoodBank } from 'react-icons/md'
 import { BiSearch } from 'react-icons/bi'
 import { BsCartCheckFill } from 'react-icons/bs'
 import { IoFastFood } from 'react-icons/io5'
-
+import {useSelector} from 'react-redux'
 
 import { useNavigate } from 'react-router-dom'
 export const MobileNavigatio = () => {
@@ -13,15 +13,20 @@ export const MobileNavigatio = () => {
     console.log('click---------------')
     Navigate('/login')
   }
-  
+  const handleSearch = () => {
+    console.log('serch');
+    
+    Navigate('/search')
+  }
+  const user =useSelector((state)=>state?.user?.user?.name)
   return (
     <>
-      <div className="fixed bottom-0 z-50 w-full -translate-x-1/2 bg-white border-t border-gray-200 left-1/2 dark:bg-white-700 dark:border-gray-600">
-        <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
+      <div className="fixed bottom-0 z-50 w-full  -translate-x-1/2 bg-white border-t border-gray-200 left-1/2 dark:bg-white-700 dark:border-gray-600">
+        <div className="grid h-full max-w-full grid-cols-5 mx-auto ">
           <button
             data-tooltip-target="tooltip-home"
             type="button"
-            className="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-white group"
+            className="inline-flex flex-col items-center justify-center p-1 hover:bg-gray-50 dark:hover:bg-white group"
           >
             <MdFoodBank className="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-orange-500" />
             <span>Home</span>
@@ -37,7 +42,7 @@ export const MobileNavigatio = () => {
           <button
             data-tooltip-target="tooltip-bookmark"
             type="button"
-            className="inline-flex flex-col items-center justify-center p-4 hover:bg-orengeq-50 dark:hover:bg-white group"
+            className="inline-flex flex-col items-center justify-center p-1 hover:bg-orengeq-50 dark:hover:bg-white group"
           >
             <IoFastFood className="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-orange-500" />
             <span>orders</span>
@@ -53,7 +58,7 @@ export const MobileNavigatio = () => {
           <button
             data-tooltip-target="tooltip-post"
             type="button"
-            className="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-white group"
+            className="inline-flex flex-col items-center justify-center p-1 hover:bg-gray-50 dark:hover:bg-white group"
           >
             <BsCartCheckFill className="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-orange-500" />
             <span className="sr-only">New post</span>
@@ -67,10 +72,10 @@ export const MobileNavigatio = () => {
             New post
             <div className="tooltip-arrow" data-popper-arrow></div>
           </div>
-          <button 
+          <button onClick={handleSearch}
             data-tooltip-target="tooltip-search"
             type="button"
-            className="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-white group"
+            className="inline-flex flex-col items-center justify-center p-1 hover:bg-gray-50 dark:hover:bg-white group"
           >
             <BiSearch className="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-orange-500" />
             <span className="sr-only">Search</span>
@@ -88,11 +93,11 @@ export const MobileNavigatio = () => {
             onClick={accountHandleclick}
             data-tooltip-target="tooltip-settings"
             type="button"
-            className="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-white group"
+            className="inline-flex flex-col items-center justify-center p-1 hover:bg-gray-50 dark:hover:bg-white group"
           >
             <MdPersonOutline className="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-orenge-600 dark:group-hover:text-orange-500" />
-
-            <span>account</span>
+            {user?<span>{user}</span>:<span>account</span>}
+            
           </button>
         </div>
       </div>

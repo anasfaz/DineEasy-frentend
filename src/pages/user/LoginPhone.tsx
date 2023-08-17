@@ -6,16 +6,22 @@ import { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { auth } from "../../config/firebase";
-import {userNumberVerify} from'../../api/userServices'
+
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { async } from "@firebase/util";
+import { useDispatch } from 'react-redux'
+import { useLocation } from "react-router-dom";
+
 // import { toast, Toaster } from "react-hot-toast";
 declare const window: any;
 const LoginPhone = () => {
+  
+  
   const [otp, setOtp] = useState("");
   const [ph, setPh] = useState("");
   const [loading, setLoading] = useState(false);
   const [showOTP, setShowOTP] = useState(false);
-  const [user, setUser] = useState(null);
+  
 
   const Navigate=useNavigate()
   function onCaptchVerify() {
@@ -46,7 +52,10 @@ const LoginPhone = () => {
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;
         setLoading(false);
-        setShowOTP(true);
+        
+        Navigate('/otp-verify')
+        console.log(confirmationResult,'------------');
+        
         // toast.success("OTP sended successfully!");
       })
       .catch((error) => {
@@ -55,87 +64,34 @@ const LoginPhone = () => {
       });
   }
 
-  function onOTPVerify() {
-    setLoading(true);
-    window.confirmationResult
-      .confirm(otp)
-      .then(async (res) => {
-        console.log(res);
-      const response= await userNumberVerify(res._tokenResponse.idToken)
-        // setUser(res.user);
-        console.log(response,'-----------------respons login66 page');
-        
-        console.log(response?.data,'---------------user data-------------');
-        if (response?.data.user) {
-          setUser(response.data.user)
-
-        }
-        
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
-  }
+  
 
   return (
-    <section className="bg-emerald-500 flex items-center justify-center h-screen">
+    <section className="bg-[#fc8019] flex  justify-center h-screen">
       <div>
         {/* <Toaster toastOptions={{ duration: 4000 }} /> */}
         <div id="recaptcha-container"> </div>
-        {user ? (
-          Navigate("/")
-        ) : (
+        
           <div className="w-80 flex flex-col gap-4 rounded-lg p-4">
             <h1 className="text-center leading-normal text-white font-medium text-3xl mb-6">
               Welcome  <br /> 
             </h1>
-            {showOTP ? (
+          
               <>
-                <div className="bg-white text-emerald-500 w-fit mx-auto p-4 rounded-full">
-                  <BsFillShieldLockFill size={30} />
-                </div>
-                <label
-                  htmlFor="otp"
-                  className="font-bold text-xl text-white text-center"
-                >
-                  Enter your OTP
-                </label>
-                <OtpInput
-                  value={otp}
-                  onChange={setOtp}
-                  OTPLength={6}
-                  otpType="number"
-                  disabled={false}
-                  autoFocus
-                  className="opt-container "
-                ></OtpInput>
-                <button
-                  onClick={onOTPVerify}
-                  className="bg-emerald-600 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded"
-                >
-                  {loading && (
-                    <CgSpinner size={20} className="mt-1 animate-spin" />
-                  )}
-                  <span>Verify OTP</span>
-                </button>
-              </>
-            ) : (
-              <>
-                <div className="bg-white text-emerald-500 w-fit mx-auto p-4 rounded-full">
+                <div className="bg-white text-orange-500 w-fit mx-auto p-4 rounded-full overflow-hidden">
                   <BsTelephoneFill size={30} />
                 </div>
                 <label
                   htmlFor=""
                   className="font-bold text-xl text-white text-center"
                 >
-                  Verify your phone number
-                </label>
-                <PhoneInput country={"in"} value={ph} onChange={setPh} />
+                  Login with phone number
+            </label>
+            
+                <PhoneInput country={"in"} value={ph} onChange={setPh} inputStyle={{width:'100%'}} />
                 <button
                   onClick={onSignup}
-                  className="bg-emerald-600 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded"
+                  className="bg-orange-600 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded"
                 >
                   {loading && (
                     <CgSpinner size={20} className="mt-1 animate-spin" />
@@ -143,9 +99,9 @@ const LoginPhone = () => {
                   <span>Send code via SMS</span>
                 </button>
               </>
-            )}
+            
           </div>
-        )}
+    
       </div>
     </section>
   );
